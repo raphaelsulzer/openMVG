@@ -14,6 +14,9 @@ if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
   message(FATAL_ERROR "In-source builds not allowed.")
 endif()
 
+# disable all warnings:
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-all")
+
 # ==============================================================================
 # OpenMVG build options
 # ==============================================================================
@@ -160,6 +163,10 @@ endif()
 # ==============================================================================
 # IMAGE IO detection
 # ==============================================================================
+# added because of runtime errors otherwise, see here: https://github.com/openMVG/openMVG/issues/1349
+set(CMAKE_FIND_FRAMEWORK LAST)
+
+
 find_package(JPEG QUIET)
 find_package(PNG QUIET)
 find_package(TIFF QUIET)
